@@ -7,6 +7,8 @@ public class ShipPlacementController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TilemapBoardManager boardManager;
+    [SerializeField] private ShipPlacementManager shipPlacementManager;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Tiles")]
     [SerializeField] private TileBase dockShipTile;
@@ -14,35 +16,6 @@ public class ShipPlacementController : MonoBehaviour
     [Header("Dock Settings")]
     [SerializeField] private Vector3Int dockOrigin = new Vector3Int(9, -6, 0);
     [SerializeField] private int dockLineGap = 2;
-
-    [ContextMenu("대기석 배 그리기")]
-    private void DrawDockShipsInEditor()
-    {
-        if (boardManager == null)
-        {
-            Debug.LogWarning("BoardManager가 연결되지 않았습니다.");
-            return;
-        }
-
-        CreateDockShips();
-        DrawDockShips();
-
-        Debug.Log("에디터에서 대기석 배를 그렸습니다.");
-    }
-
-    [ContextMenu("대기석 배 지우기")]
-    private void ClearDockShipsInEditor()
-    {
-        if (boardManager == null)
-        {
-            Debug.LogWarning("BoardManager가 연결되지 않았습니다.");
-            return;
-        }
-
-        boardManager.ClearDockArea();
-
-        Debug.Log("에디터에서 대기석 배를 지웠습니다.");
-    }
 
     private readonly int[] shipSizes = { 2, 3, 3, 4, 5 };
 
@@ -59,7 +32,7 @@ public class ShipPlacementController : MonoBehaviour
 
     private void Update()
     {
-        if (mainCamera == null || boardManager == null)
+        if (mainCamera == null || boardManager == null || shipPlacementManager == null)
             return;
 
         HandleRotate();
@@ -181,7 +154,7 @@ public class ShipPlacementController : MonoBehaviour
 
         Vector3Int cellPos = GetMouseCellPosition();
 
-        bool placed = boardManager.TryPlaceShip(
+        bool placed = shipPlacementManager.TryPlaceShip(
             cellPos,
             selectedShip.size,
             currentDirection,
@@ -189,7 +162,7 @@ public class ShipPlacementController : MonoBehaviour
         );
 
         if (placed)
-        {
+        {   
             selectedShip.isPlaced = true;
             selectedShip = null;
             currentDirection = ShipDirection.Horizontal;
@@ -199,7 +172,12 @@ public class ShipPlacementController : MonoBehaviour
             Debug.Log("배 배치 성공");
 
             if (IsAllShipsPlaced())
-                Debug.Log("모든 배 배치 완료!");
+            {
+                Debug.Log("모든 배 배치 완료! 전투 단계로 전환");
+
+                if (gameManager != null)
+                    gameManager.SetBattlePhase();
+            }
 
             return;
         }
@@ -224,6 +202,7 @@ public class ShipPlacementController : MonoBehaviour
             return;
 
         selectedShip.isPlaced = false;
+
         boardManager.ClearPreview();
         DrawDockShips();
 
@@ -255,5 +234,34 @@ public class ShipPlacementController : MonoBehaviour
         mouseWorldPos.z = 0f;
 
         return boardManager.WorldToCell(mouseWorldPos);
+    }
+
+    [ContextMenu("대기석 배 그리기")]
+    private void DrawDockShipsInEditor()
+    {
+        if (boardManager == null)
+        {
+            Debug.LogWarning("BoardManager가 연결되지 않았습니다.");
+            return;
+        }
+
+        CreateDockShips();
+        DrawDockShips();
+
+        Debug.Log("에디터에서 대기석 배를 그렸습니다.");
+    }
+
+    [ContextMenu("대기석 배 지우기")]
+    private void ClearDockShipsInEditor()
+    {
+        if (boardManager == null)
+        {
+            Debug.LogWarning("BoardManager가 연결되지 않았습니다.");
+            return;
+        }
+
+        boardManager.ClearDockArea();
+
+        Debug.Log("에디터에서 대기석 배를 지웠습니다.");
     }
 }
