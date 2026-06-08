@@ -68,7 +68,7 @@ public class ShipPlacementManager : MonoBehaviour
     {
         if (!boardManager.IsInsideBoard(tilemapPos))
         {
-            Debug.Log("º¸µå ¹ÛÀÌ¶ó ¹èÄ¡ ºÒ°¡");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½Ä¡ ï¿½Ò°ï¿½");
             return false;
         }
 
@@ -76,7 +76,7 @@ public class ShipPlacementManager : MonoBehaviour
 
         if (!CanPlaceShip(startBoardPos, size, direction))
         {
-            Debug.Log("¹èÄ¡ ºÒ°¡ À§Ä¡ÀÔ´Ï´Ù.");
+            Debug.Log("ï¿½ï¿½Ä¡ ï¿½Ò°ï¿½ ï¿½ï¿½Ä¡ï¿½Ô´Ï´ï¿½.");
             return false;
         }
 
@@ -108,8 +108,8 @@ public class ShipPlacementManager : MonoBehaviour
         placedShips.Add(newShip);
         boardManager.ClearPreview();
 
-        Debug.Log($"¹è ¹èÄ¡ ¿Ï·á / Size:{size}, Direction:{direction}, ShipId:{shipId}");
-        Debug.Log($"ÇöÀç ¹èÄ¡µÈ ¹è ¼ö: {placedShips.Count}");
+        Debug.Log($"ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Ï·ï¿½ / Size:{size}, Direction:{direction}, ShipId:{shipId}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: {placedShips.Count}");
 
         return true;
     }

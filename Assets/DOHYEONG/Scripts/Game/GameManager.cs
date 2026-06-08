@@ -4,7 +4,11 @@ public class GameManager : MonoBehaviour
 {
     [Header("Controllers")]
     [SerializeField] private ShipPlacementController shipPlacementController;
-    [SerializeField] private BattleInputController battleInputController;
+    [SerializeField] private TargetAttackController targetAttackController;
+    [SerializeField] private TurnManager turnManager;
+
+    [Header("UI")]
+    [SerializeField] private GameStatusUI gameStatusUI;
 
     public GamePhase CurrentPhase { get; private set; } = GamePhase.Placement;
 
@@ -20,10 +24,16 @@ public class GameManager : MonoBehaviour
         if (shipPlacementController != null)
             shipPlacementController.enabled = true;
 
-        if (battleInputController != null)
-            battleInputController.SetAttackMode(false);
+        if (targetAttackController != null)
+            targetAttackController.SetCanAttack(false);
 
-        Debug.Log("¹èÄ¡ ´Ü°è ½ÃÀÛ");
+        if (gameStatusUI != null)
+        {
+            gameStatusUI.SetStatus("ë°°ë¥¼ ë°°ì¹˜í•˜ì„¸ìš”");
+            gameStatusUI.HideTimer();
+        }
+
+        Debug.Log("ë°°ì¹˜ ë‹¨ê³„ ì‹œìž‘");
     }
 
     public void SetBattlePhase()
@@ -33,22 +43,45 @@ public class GameManager : MonoBehaviour
         if (shipPlacementController != null)
             shipPlacementController.enabled = false;
 
-        if (battleInputController != null)
-            battleInputController.SetAttackMode(true);
+        if (turnManager != null)
+            turnManager.StartTurnByRole();
+        else if (targetAttackController != null)
+            targetAttackController.SetCanAttack(false);
 
-        Debug.Log("ÀüÅõ ´Ü°è ½ÃÀÛ");
+        if (gameStatusUI != null)
+            gameStatusUI.SetStatus("ì „íˆ¬ ì‹œìž‘");
+
+        Debug.Log("ì „íˆ¬ ë‹¨ê³„ ì‹œìž‘");
     }
 
     public void SetGameOverPhase()
+    {
+        SetGameOverPhase(false);
+    }
+
+    public void SetGameOverPhase(bool isWin)
     {
         CurrentPhase = GamePhase.GameOver;
 
         if (shipPlacementController != null)
             shipPlacementController.enabled = false;
 
-        if (battleInputController != null)
-            battleInputController.SetAttackMode(false);
+        if (targetAttackController != null)
+            targetAttackController.SetCanAttack(false);
 
-        Debug.Log("°ÔÀÓ Á¾·á");
+        if (turnManager != null)
+            turnManager.StopTurn();
+
+        if (gameStatusUI != null)
+        {
+            gameStatusUI.HideTimer();
+
+            if (isWin)
+                gameStatusUI.SetStatus("ìŠ¹ë¦¬!");
+            else
+                gameStatusUI.SetStatus("íŒ¨ë°°...");
+        }
+
+        Debug.Log(isWin ? "ê²Œìž„ ì¢…ë£Œ: ìŠ¹ë¦¬" : "ê²Œìž„ ì¢…ë£Œ: íŒ¨ë°°");
     }
 }

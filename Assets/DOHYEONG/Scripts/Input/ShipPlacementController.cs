@@ -9,6 +9,7 @@ public class ShipPlacementController : MonoBehaviour
     [SerializeField] private TilemapBoardManager boardManager;
     [SerializeField] private ShipPlacementManager shipPlacementManager;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private ReadyManager readyManager;
 
     [Header("Tiles")]
     [SerializeField] private TileBase dockShipTile;
@@ -96,7 +97,7 @@ public class ShipPlacementController : MonoBehaviour
             ? ShipDirection.Vertical
             : ShipDirection.Horizontal;
 
-        Debug.Log($"¼±ÅÃ ¹è È¸Àü: {currentDirection}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È¸ï¿½ï¿½: {currentDirection}");
     }
 
     private void HandlePickShipFromDock()
@@ -121,7 +122,7 @@ public class ShipPlacementController : MonoBehaviour
 
                 RemoveDockShipVisual(ship);
 
-                Debug.Log($"¹è ¼±ÅÃµÊ / Size:{ship.size}, ShipId:{ship.shipId}");
+                Debug.Log($"ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ / Size:{ship.size}, ShipId:{ship.shipId}");
                 return;
             }
         }
@@ -169,14 +170,14 @@ public class ShipPlacementController : MonoBehaviour
 
             boardManager.ClearPreview();
 
-            Debug.Log("¹è ¹èÄ¡ ¼º°ø");
+            Debug.Log("ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½");
 
             if (IsAllShipsPlaced())
             {
-                Debug.Log("¸ðµç ¹è ¹èÄ¡ ¿Ï·á! ÀüÅõ ´Ü°è·Î ÀüÈ¯");
+                Debug.Log("ëª¨ë“  ë°° ë°°ì¹˜ ì™„ë£Œ! Ready ì „ì†¡");
 
-                if (gameManager != null)
-                    gameManager.SetBattlePhase();
+                if (readyManager != null)
+                    readyManager.SetLocalReady();
             }
 
             return;
@@ -206,7 +207,7 @@ public class ShipPlacementController : MonoBehaviour
         boardManager.ClearPreview();
         DrawDockShips();
 
-        Debug.Log("¹è°¡ ´ë±â¼®À¸·Î µ¹¾Æ°¨");
+        Debug.Log("ï¿½è°¡ ï¿½ï¿½â¼®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½");
 
         selectedShip = null;
         currentDirection = ShipDirection.Horizontal;
@@ -236,32 +237,32 @@ public class ShipPlacementController : MonoBehaviour
         return boardManager.WorldToCell(mouseWorldPos);
     }
 
-    [ContextMenu("´ë±â¼® ¹è ±×¸®±â")]
+    [ContextMenu("ï¿½ï¿½â¼® ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½")]
     private void DrawDockShipsInEditor()
     {
         if (boardManager == null)
         {
-            Debug.LogWarning("BoardManager°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("BoardManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
         CreateDockShips();
         DrawDockShips();
 
-        Debug.Log("¿¡µðÅÍ¿¡¼­ ´ë±â¼® ¹è¸¦ ±×·È½À´Ï´Ù.");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½â¼® ï¿½è¸¦ ï¿½×·È½ï¿½ï¿½Ï´ï¿½.");
     }
 
-    [ContextMenu("´ë±â¼® ¹è Áö¿ì±â")]
+    [ContextMenu("ï¿½ï¿½â¼® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½")]
     private void ClearDockShipsInEditor()
     {
         if (boardManager == null)
         {
-            Debug.LogWarning("BoardManager°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("BoardManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
         boardManager.ClearDockArea();
 
-        Debug.Log("¿¡µðÅÍ¿¡¼­ ´ë±â¼® ¹è¸¦ Áö¿ü½À´Ï´Ù.");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½â¼® ï¿½è¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
     }
 }
