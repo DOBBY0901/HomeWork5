@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: f4a5c5f32baa0b846991aea56428d870
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7328713196762549366
+    second: BATTLE_SHIPS_logo_202606090947_0
+  - first:
+      213: 16158352904143838
+    second: BATTLE_SHIPS_logo_202606090947_1
+  - first:
+      213: -3012577967334712521
+    second: BATTLE_SHIPS_logo_202606090947_2
+  - first:
+      213: -8292700536544727186
+    second: BATTLE_SHIPS_logo_202606090947_3
+  - first:
+      213: -8638771188665361954
+    second: BATTLE_SHIPS_logo_202606090947_4
+  - first:
+      213: -8625792130300454239
+    second: BATTLE_SHIPS_logo_202606090947_5
+  - first:
+      213: -7859318015107885954
+    second: BATTLE_SHIPS_logo_202606090947_6
+  - first:
+      213: 2547052258924889488
+    second: BATTLE_SHIPS_logo_202606090947_7
+  - first:
+      213: 6697590964542447332
+    second: BATTLE_SHIPS_logo_202606090947_8
+  - first:
+      213: -1651687787932307672
+    second: BATTLE_SHIPS_logo_202606090947_9
+  - first:
+      213: 5597802299446069687
+    second: BATTLE_SHIPS_logo_202606090947_10
+  - first:
+      213: 4664011646576530051
+    second: BATTLE_SHIPS_logo_202606090947_11
+  - first:
+      213: -8167370155488655017
+    second: BATTLE_SHIPS_logo_202606090947_12
+  - first:
+      213: 6673483247265203618
+    second: BATTLE_SHIPS_logo_202606090947_13
+  - first:
+      213: -8563424191566343198
+    second: BATTLE_SHIPS_logo_202606090947_14
+  - first:
+      213: 111294328218868373
+    second: BATTLE_SHIPS_logo_202606090947_15
+  - first:
+      213: 3657382688862074080
+    second: BATTLE_SHIPS_logo_202606090947_16
+  - first:
+      213: -2362570528488971992
+    second: BATTLE_SHIPS_logo_202606090947_17
+  - first:
+      213: -560105780109246001
+    second: BATTLE_SHIPS_logo_202606090947_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_0
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 183
+        width: 1009
+        height: 497
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67ccfb1c2d1d4b560800000000000000
+      internalID: 7328713196762549366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_1
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 121
+        width: 29
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed3c105bfe7693000800000000000000
+      internalID: 16158352904143838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_2
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 121
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73b98decc4c2136d0800000000000000
+      internalID: -3012577967334712521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_3
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 137
+        width: 29
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6f6f827cc86aec80800000000000000
+      internalID: -8292700536544727186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_4
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 121
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9d8b3cf5bec1880800000000000000
+      internalID: -8638771188665361954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_5
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 121
+        width: 30
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aad41742c70b4880800000000000000
+      internalID: -8625792130300454239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_6
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 121
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e749aacd7e71ee290800000000000000
+      internalID: -7859318015107885954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_7
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 121
+        width: 80
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 095039dd882f85320800000000000000
+      internalID: 2547052258924889488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_8
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 121
+        width: 35
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee1b643f7f92fc50800000000000000
+      internalID: 6697590964542447332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_9
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 121
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82fa17835b60419e0800000000000000
+      internalID: -1651687787932307672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_10
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 121
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b9095d68836fad40800000000000000
+      internalID: 5597802299446069687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_11
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 121
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3829a7ea1e5e9b040800000000000000
+      internalID: 4664011646576530051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_12
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 121
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 759c8fcbd1ca7ae80800000000000000
+      internalID: -8167370155488655017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_13
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 121
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a543cfd7a9fc9c50800000000000000
+      internalID: 6673483247265203618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_14
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 121
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e393b8911b982980800000000000000
+      internalID: -8563424191566343198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_15
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 121
+        width: 35
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59a50031a956b8100800000000000000
+      internalID: 111294328218868373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_16
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 121
+        width: 35
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e479498d22a1c230800000000000000
+      internalID: 3657382688862074080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_17
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 121
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821ab9c2f96763fd0800000000000000
+      internalID: -2362570528488971992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BATTLE_SHIPS_logo_202606090947_18
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 121
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc102f3b2ca1a38f0800000000000000
+      internalID: -560105780109246001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BATTLE_SHIPS_logo_202606090947_0: 7328713196762549366
+      BATTLE_SHIPS_logo_202606090947_1: 16158352904143838
+      BATTLE_SHIPS_logo_202606090947_10: 5597802299446069687
+      BATTLE_SHIPS_logo_202606090947_11: 4664011646576530051
+      BATTLE_SHIPS_logo_202606090947_12: -8167370155488655017
+      BATTLE_SHIPS_logo_202606090947_13: 6673483247265203618
+      BATTLE_SHIPS_logo_202606090947_14: -8563424191566343198
+      BATTLE_SHIPS_logo_202606090947_15: 111294328218868373
+      BATTLE_SHIPS_logo_202606090947_16: 3657382688862074080
+      BATTLE_SHIPS_logo_202606090947_17: -2362570528488971992
+      BATTLE_SHIPS_logo_202606090947_18: -560105780109246001
+      BATTLE_SHIPS_logo_202606090947_2: -3012577967334712521
+      BATTLE_SHIPS_logo_202606090947_3: -8292700536544727186
+      BATTLE_SHIPS_logo_202606090947_4: -8638771188665361954
+      BATTLE_SHIPS_logo_202606090947_5: -8625792130300454239
+      BATTLE_SHIPS_logo_202606090947_6: -7859318015107885954
+      BATTLE_SHIPS_logo_202606090947_7: 2547052258924889488
+      BATTLE_SHIPS_logo_202606090947_8: 6697590964542447332
+      BATTLE_SHIPS_logo_202606090947_9: -1651687787932307672
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

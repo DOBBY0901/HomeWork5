@@ -84,4 +84,28 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(isWin ? "게임 종료: 승리" : "게임 종료: 패배");
     }
+    public void OnNetworkDisconnected()
+    {
+        if (CurrentPhase == GamePhase.GameOver)
+            return;
+
+        CurrentPhase = GamePhase.Placement;
+
+        if (shipPlacementController != null)
+            shipPlacementController.enabled = false;
+
+        if (targetAttackController != null)
+            targetAttackController.SetCanAttack(false);
+
+        if (turnManager != null)
+            turnManager.StopTurn();
+
+        if (gameStatusUI != null)
+        {
+            gameStatusUI.HideTimer();
+            gameStatusUI.SetStatus("상대 연결이 끊겼습니다");
+        }
+
+        Debug.Log("상대 연결 끊김 처리 완료");
+    }
 }

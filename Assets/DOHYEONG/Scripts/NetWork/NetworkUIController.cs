@@ -6,58 +6,76 @@ public class NetworkUIController : MonoBehaviour
     [Header("Network")]
     [SerializeField] private SimpleTcpNetworkManager networkManager;
 
-    [Header("UI")]
-    [SerializeField] private GameObject networkPanel;
-    [SerializeField] private Button hostButton;
-    [SerializeField] private Button clientButton;
+    [Header("Menu")]
+    [SerializeField] private MainMenuController mainMenuController;
+
+    [Header("Game")]
+    [SerializeField] private GameManager gameManager;
+
+    [Header("Buttons")]
+    [SerializeField] private Button createGameButton;
+    [SerializeField] private Button joinGameButton;
 
     private void Awake()
     {
-        if (hostButton != null)
-            hostButton.onClick.AddListener(OnClickHost);
+        if (createGameButton != null)
+            createGameButton.onClick.AddListener(OnClickCreateGame);
 
-        if (clientButton != null)
-            clientButton.onClick.AddListener(OnClickClient);
+        if (joinGameButton != null)
+            joinGameButton.onClick.AddListener(OnClickJoinGame);
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (networkManager == null)
-            return;
+        if (networkManager != null)
+            networkManager.OnDisconnected += HandleDisconnected;
+    }
 
-        if (networkManager.IsConnected)
-        {
-            if (networkPanel != null && networkPanel.activeSelf)
-                networkPanel.SetActive(false);
-        }
+    private void OnDisable()
+    {
+        if (networkManager != null)
+            networkManager.OnDisconnected -= HandleDisconnected;
     }
 
     private void OnDestroy()
     {
-        if (hostButton != null)
-            hostButton.onClick.RemoveListener(OnClickHost);
+        if (createGameButton != null)
+            createGameButton.onClick.RemoveListener(OnClickCreateGame);
 
-        if (clientButton != null)
-            clientButton.onClick.RemoveListener(OnClickClient);
+        if (joinGameButton != null)
+            joinGameButton.onClick.RemoveListener(OnClickJoinGame);
     }
 
-    private void OnClickHost()
+    private void OnClickCreateGame()
     {
-        if (networkManager == null)
-            return;
+        if (networkManager != null)
+            networkManager.StartHost();
 
-        networkManager.StartHost();
+        if (mainMenuController != null)
+            mainMenuController.ShowGamePanel();
 
-        Debug.Log("Host 버튼 클릭");
+        Debug.Log("게임 생성 버튼 클릭");
     }
 
-    private void OnClickClient()
+    private void OnClickJoinGame()
     {
-        if (networkManager == null)
-            return;
+        if (networkManager != null)
+            networkManager.StartClient();
 
-        networkManager.StartClient();
+        if (mainMenuController != null)
+            mainMenuController.ShowGamePanel();
 
-        Debug.Log("Client 버튼 클릭");
+        Debug.Log("게임 참가 버튼 클릭");
+    }
+
+    private void HandleDisconnected()
+    {
+        if (gameManager != null)
+            gameManager.OnNetworkDisconnected();
+
+        if (mainMenuController != null)
+            mainMenuController.ShowNetworkPanel();
+
+        Debug.Log("연결 끊김: 네트워크 패널로 복귀");
     }
 }

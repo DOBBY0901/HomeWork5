@@ -23,6 +23,7 @@ public class SimpleTcpNetworkManager : MonoBehaviour
 
     private bool isRunning;
     private bool isConnected;
+    private bool pendingDisconnectEvent;
 
     public bool IsConnected => isConnected;
 
@@ -30,6 +31,7 @@ public class SimpleTcpNetworkManager : MonoBehaviour
     private readonly ConcurrentQueue<string> receivedMessages = new ConcurrentQueue<string>();
 
     public event Action<string> OnMessageReceived;
+    public event Action OnDisconnected;
     public bool IsHost { get; private set; }
 
     private void Update()
@@ -38,6 +40,12 @@ public class SimpleTcpNetworkManager : MonoBehaviour
         {
             Debug.Log($"수신: {message}");
             OnMessageReceived?.Invoke(message);
+        }
+
+        if (pendingDisconnectEvent)
+        {
+            pendingDisconnectEvent = false;
+            OnDisconnected?.Invoke();
         }
     }
 
@@ -192,6 +200,8 @@ public class SimpleTcpNetworkManager : MonoBehaviour
 
     public void Disconnect()
     {
+        bool wasConnectedOrRunning = isConnected || isRunning;
+
         isRunning = false;
         isConnected = false;
 
@@ -212,5 +222,8 @@ public class SimpleTcpNetworkManager : MonoBehaviour
         server = null;
 
         Debug.Log("네트워크 종료");
+
+        if (wasConnectedOrRunning)
+            pendingDisconnectEvent = true;
     }
 }
