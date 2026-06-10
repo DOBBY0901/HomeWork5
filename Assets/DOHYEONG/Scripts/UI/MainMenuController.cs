@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    private static bool openNetworkPanelAfterReload = false;
+
     [Header("Panels")]
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject howToPlayPanel;
@@ -20,7 +23,15 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
-        ShowMainMenu();
+        if (openNetworkPanelAfterReload)
+        {
+            openNetworkPanelAfterReload = false;
+            ShowNetworkPanel();
+        }
+        else
+        {
+            ShowMainMenu();
+        }
     }
 
     public void OnClickStart()
@@ -62,6 +73,34 @@ public class MainMenuController : MonoBehaviour
         chatPanel.SetActive(!chatPanel.activeSelf);
     }
 
+    // 결과창 - 다시하기
+    public void OnClickRestartGame()
+    {
+        if (networkManager != null && networkManager.IsConnected)
+            networkManager.Disconnect();
+
+        Time.timeScale = 1f;
+
+        // 씬 재로드 후 메인메뉴가 아니라 네트워크 선택 화면으로 이동
+        openNetworkPanelAfterReload = true;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // 결과창 - 메인메뉴
+    public void OnClickBackToMainMenu()
+    {
+        if (networkManager != null && networkManager.IsConnected)
+            networkManager.Disconnect();
+
+        Time.timeScale = 1f;
+
+        // 메인메뉴 버튼은 진짜 메인메뉴로 이동
+        openNetworkPanelAfterReload = false;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void OnClickExit()
     {
         Application.Quit();
@@ -78,7 +117,6 @@ public class MainMenuController : MonoBehaviour
         SetActive(networkPanel, false);
         SetActive(gamePanel, false);
 
-        // 메인메뉴에서는 채팅 완전 숨김
         SetActive(chatPanel, false);
         SetActive(chatToggleButton, false);
 
@@ -92,7 +130,6 @@ public class MainMenuController : MonoBehaviour
         SetActive(networkPanel, true);
         SetActive(gamePanel, false);
 
-        // 네트워크 패널에서는 채팅 사용 안 함
         SetActive(chatPanel, false);
         SetActive(chatToggleButton, false);
 
@@ -106,7 +143,6 @@ public class MainMenuController : MonoBehaviour
         SetActive(networkPanel, false);
         SetActive(gamePanel, true);
 
-        // 게임 화면에서만 채팅 버튼 표시
         SetActive(chatPanel, false);
         SetActive(chatToggleButton, true);
 

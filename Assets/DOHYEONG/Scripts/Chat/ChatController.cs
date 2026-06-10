@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ChatController : MonoBehaviour
 {
@@ -10,12 +10,19 @@ public class ChatController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI chatLogText;
     [SerializeField] private TMP_InputField chatInputField;
+    [SerializeField] private ScrollRect chatScrollRect;
 
     [Header("Settings")]
     [SerializeField] private int maxMessageCount = 30;
 
     private string chatLog = "";
     private int messageCount = 0;
+
+    private void Awake()
+    {
+        if (chatInputField != null)
+            chatInputField.onSubmit.AddListener(OnSubmitChat);
+    }
 
     private void OnEnable()
     {
@@ -29,39 +36,52 @@ public class ChatController : MonoBehaviour
             networkManager.OnMessageReceived -= HandleNetworkMessage;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (chatInputField == null)
-            return;
-
-        if (!chatInputField.isFocused)
-            return;
-
-        if (Keyboard.current.enterKey.wasPressedThisFrame ||
-            Keyboard.current.numpadEnterKey.wasPressedThisFrame)
-        {
-            SendChatMessage();
-        }
+        if (chatInputField != null)
+            chatInputField.onSubmit.RemoveListener(OnSubmitChat);
     }
 
-    private void SendChatMessage()
+    private void OnSubmitChat(string inputText)
     {
-        if (chatInputField == null)
-            return;
+        SendChatMessage(inputText);
+    }
 
-        string message = chatInputField.text.Trim();
+    private void SendChatMessage(string inputText)
+    {
+        Debug.Log("채팅 전송 시도");
+
+        if (chatInputField == null)
+        {
+            Debug.LogWarning("ChatInputField가 연결되지 않았습니다.");
+            return;
+        }
+
+        string message = inputText.Trim();
+
+        Debug.Log($"입력 메시지: {message}");
 
         if (string.IsNullOrEmpty(message))
+        {
+            ClearInput();
             return;
+        }
 
-        if (networkManager == null || !networkManager.IsConnected)
+        if (networkManager == null)
+        {
+            AddSystemMessage("NetworkManager가 연결되지 않았습니다.");
+            ClearInput();
+            return;
+        }
+
+        if (!networkManager.IsConnected)
         {
             AddSystemMessage("연결된 상대가 없습니다.");
             ClearInput();
             return;
         }
 
-        string senderName = networkManager.IsHost ? "Host" : "Client";
+        string senderName = networkManager.IsHost ? "상대" : "상대";
 
         ChatPacketData chatData = new ChatPacketData(senderName, message);
         networkManager.SendPacket(PacketType.Chat, chatData);
@@ -106,12 +126,21 @@ public class ChatController : MonoBehaviour
     {
         messageCount++;
 
-        chatLog += $"{sender}: {message}\n";
+        chatLog += $"{sender} : {message}\n";
 
         TrimChatLogIfNeeded();
 
         if (chatLogText != null)
+        {
             chatLogText.text = chatLog;
+            Debug.Log($"채팅 로그 갱신: {chatLog}");
+        }
+        else
+        {
+            Debug.LogWarning("ChatLogText가 연결되지 않았습니다.");
+        }
+
+        ScrollToBottom();
     }
 
     private void AddSystemMessage(string message)
@@ -124,6 +153,8 @@ public class ChatController : MonoBehaviour
 
         if (chatLogText != null)
             chatLogText.text = chatLog;
+
+        ScrollToBottom();
     }
 
     private void TrimChatLogIfNeeded()
@@ -156,5 +187,15 @@ public class ChatController : MonoBehaviour
 
         chatInputField.text = "";
         chatInputField.ActivateInputField();
+        chatInputField.Select();
+    }
+
+    private void ScrollToBottom()
+    {
+        if (chatScrollRect == null)
+            return;
+
+        Canvas.ForceUpdateCanvases();
+        chatScrollRect.verticalNormalizedPosition = 0f;
     }
 }

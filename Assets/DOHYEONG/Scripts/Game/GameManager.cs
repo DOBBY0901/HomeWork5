@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         {
             gameStatusUI.SetStatus("배를 배치하세요");
             gameStatusUI.HideTimer();
+            gameStatusUI.HideResult();
         }
 
         Debug.Log("배치 단계 시작");
@@ -49,7 +50,10 @@ public class GameManager : MonoBehaviour
             targetAttackController.SetCanAttack(false);
 
         if (gameStatusUI != null)
+        {
             gameStatusUI.SetStatus("전투 시작");
+            gameStatusUI.HideResult();
+        }
 
         Debug.Log("전투 단계 시작");
     }
@@ -75,15 +79,13 @@ public class GameManager : MonoBehaviour
         if (gameStatusUI != null)
         {
             gameStatusUI.HideTimer();
-
-            if (isWin)
-                gameStatusUI.SetStatus("승리!");
-            else
-                gameStatusUI.SetStatus("패배...");
+            gameStatusUI.SetStatus("");
+            gameStatusUI.ShowResult(isWin);
         }
 
         Debug.Log(isWin ? "게임 종료: 승리" : "게임 종료: 패배");
     }
+
     public void OnNetworkDisconnected()
     {
         if (CurrentPhase == GamePhase.GameOver)
