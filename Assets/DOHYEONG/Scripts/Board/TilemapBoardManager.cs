@@ -20,8 +20,7 @@ public class TilemapBoardManager : MonoBehaviour
     [SerializeField] private TileBase seaTile;
     [SerializeField] private TileBase landTile;
 
-    [Header("Ship / Marker Tiles")]
-    [SerializeField] private TileBase shipTile;
+    [Header("Marker Tiles")]
     [SerializeField] private TileBase hitTile;
     [SerializeField] private TileBase missTile;
     [SerializeField] private TileBase selectTile;
@@ -82,6 +81,12 @@ public class TilemapBoardManager : MonoBehaviour
 
     public BoardCell GetCell(int x, int y)
     {
+        if (cells == null)
+        {
+            Debug.LogError($"{gameObject.name}의 BoardCell 배열이 아직 초기화되지 않았습니다.");
+            return null;
+        }
+
         if (x < 0 || x >= width || y < 0 || y >= height)
             return null;
 
@@ -116,10 +121,37 @@ public class TilemapBoardManager : MonoBehaviour
         return mapTilemap.WorldToCell(worldPos);
     }
 
+    public Vector3Int DockWorldToCell(Vector3 worldPos)
+    {
+        if (dockTilemap == null)
+            return Vector3Int.zero;
+
+        return dockTilemap.WorldToCell(worldPos);
+    }
+
+    public Vector3 CellToWorldCenter(Vector3Int tilemapPos)
+    {
+        return mapTilemap.GetCellCenterWorld(tilemapPos);
+    }
+
+    public Vector3 DockCellToWorldCenter(Vector3Int dockPos)
+    {
+        if (dockTilemap == null)
+            return Vector3.zero;
+
+        return dockTilemap.GetCellCenterWorld(dockPos);
+    }
+
     public void ClearPreview()
     {
         if (markerTilemap != null)
             markerTilemap.ClearAllTiles();
+    }
+
+    public void ClearShipTiles()
+    {
+        if (shipTilemap != null)
+            shipTilemap.ClearAllTiles();
     }
 
     public void PreviewShip(Vector3Int tilemapPos, int size, ShipDirection direction)
@@ -147,7 +179,9 @@ public class TilemapBoardManager : MonoBehaviour
                 continue;
 
             Vector3Int drawPos = BoardToTilemapPosition(boardX, boardY);
-            markerTilemap.SetTile(drawPos, selectTile);
+
+            if (markerTilemap != null)
+                markerTilemap.SetTile(drawPos, selectTile);
         }
     }
 
@@ -167,23 +201,24 @@ public class TilemapBoardManager : MonoBehaviour
         if (cell.state == BoardCellState.Land)
             return;
 
-        markerTilemap.SetTile(tilemapPos, selectTile);
-    }
-
-    public void DrawShipTile(int boardX, int boardY)
-    {
-        Vector3Int drawPos = BoardToTilemapPosition(boardX, boardY);
-        shipTilemap.SetTile(drawPos, shipTile);
+        if (markerTilemap != null)
+            markerTilemap.SetTile(tilemapPos, selectTile);
     }
 
     public void DrawHitTile(int boardX, int boardY)
     {
+        if (markerTilemap == null)
+            return;
+
         Vector3Int drawPos = BoardToTilemapPosition(boardX, boardY);
         markerTilemap.SetTile(drawPos, hitTile);
     }
 
     public void DrawMissTile(int boardX, int boardY)
     {
+        if (markerTilemap == null)
+            return;
+
         Vector3Int drawPos = BoardToTilemapPosition(boardX, boardY);
         markerTilemap.SetTile(drawPos, missTile);
     }
@@ -198,6 +233,9 @@ public class TilemapBoardManager : MonoBehaviour
 
         Vector2Int boardPos = TilemapToBoardPosition(tilemapPos);
         BoardCell cell = GetCell(boardPos.x, boardPos.y);
+
+        if (cell == null)
+            return;
 
         Debug.Log($"Board X:{cell.x}, Y:{cell.y} / Tilemap X:{tilemapPos.x}, Y:{tilemapPos.y} / State:{cell.state} / ShipId:{cell.shipId}");
     }
@@ -238,11 +276,5 @@ public class TilemapBoardManager : MonoBehaviour
     {
         if (dockTilemap != null)
             dockTilemap.ClearAllTiles();
-    }
-
-    public void ClearShipTiles()
-    {
-        if (shipTilemap != null)
-            shipTilemap.ClearAllTiles();
     }
 }

@@ -8,6 +8,15 @@ public class ShipPlacementManager : MonoBehaviour
     [Header("Placed Ships")]
     [SerializeField] private List<ShipData> placedShips = new List<ShipData>();
 
+    [Header("Ship Visual")]
+    [SerializeField] private GameObject shipVisualPrefab;
+    [SerializeField] private Transform shipVisualParent;
+
+    [Header("Ship Visual Settings")]
+    [SerializeField] private float shipZ = -0.1f;
+    [SerializeField] private float lengthPadding = 0.95f;
+    [SerializeField] private float heightPadding = 0.75f;
+
     public IReadOnlyList<ShipData> PlacedShips => placedShips;
 
     private void Start()
@@ -68,7 +77,7 @@ public class ShipPlacementManager : MonoBehaviour
     {
         if (!boardManager.IsInsideBoard(tilemapPos))
         {
-            Debug.Log("���� ���̶� ��ġ �Ұ�");
+            Debug.Log("보드 밖이라 배치 불가");
             return false;
         }
 
@@ -76,7 +85,7 @@ public class ShipPlacementManager : MonoBehaviour
 
         if (!CanPlaceShip(startBoardPos, size, direction))
         {
-            Debug.Log("��ġ �Ұ� ��ġ�Դϴ�.");
+            Debug.Log("배치 불가 위치입니다.");
             return false;
         }
 
@@ -101,17 +110,78 @@ public class ShipPlacementManager : MonoBehaviour
             cell.shipId = shipId;
 
             newShip.AddCell(boardX, boardY);
-
-            boardManager.DrawShipTile(boardX, boardY);
         }
 
         placedShips.Add(newShip);
+
+        CreatePlacedShipVisual(startBoardPos, size, direction);
+
         boardManager.ClearPreview();
 
-        Debug.Log($"�� ��ġ �Ϸ� / Size:{size}, Direction:{direction}, ShipId:{shipId}");
-        Debug.Log($"���� ��ġ�� �� ��: {placedShips.Count}");
+        Debug.Log($"배 배치 완료 / Size:{size}, Direction:{direction}, ShipId:{shipId}");
+        Debug.Log($"현재 배치된 배 수: {placedShips.Count}");
 
         return true;
+    }
+
+    private void CreatePlacedShipVisual(Vector2Int startBoardPos, int size, ShipDirection direction)
+    {
+        if (shipVisualPrefab == null)
+        {
+            Debug.LogWarning("Ship Visual Prefab이 연결되지 않았습니다.");
+            return;
+        }
+
+        Vector3 startWorld = GetBoardCellCenterWorld(startBoardPos.x, startBoardPos.y);
+
+        int endX = startBoardPos.x;
+        int endY = startBoardPos.y;
+
+        if (direction == ShipDirection.Horizontal)
+            endX += size - 1;
+        else
+            endY += size - 1;
+
+        Vector3 endWorld = GetBoardCellCenterWorld(endX, endY);
+
+        Vector3 centerWorld = (startWorld + endWorld) * 0.5f;
+        centerWorld.z = shipZ;
+
+        Transform parent = shipVisualParent != null ? shipVisualParent : transform;
+
+        GameObject visual = Instantiate(shipVisualPrefab, centerWorld, Quaternion.identity, parent);
+
+        if (direction == ShipDirection.Vertical)
+            visual.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+
+        FitShipVisualToCells(visual, size);
+    }
+
+    private Vector3 GetBoardCellCenterWorld(int boardX, int boardY)
+    {
+        Vector3Int tilemapPos = boardManager.BoardToTilemapPosition(boardX, boardY);
+        return boardManager.CellToWorldCenter(tilemapPos);
+    }
+
+    private void FitShipVisualToCells(GameObject visual, int size)
+    {
+        SpriteRenderer spriteRenderer = visual.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null || spriteRenderer.sprite == null)
+            return;
+
+        float cellSize = 1f;
+
+        float targetLength = size * cellSize * lengthPadding;
+        float targetHeight = cellSize * heightPadding;
+
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+
+        visual.transform.localScale = new Vector3(
+            targetLength / spriteSize.x,
+            targetHeight / spriteSize.y,
+            1f
+        );
     }
 
     public ShipData GetShipDataById(int shipId)

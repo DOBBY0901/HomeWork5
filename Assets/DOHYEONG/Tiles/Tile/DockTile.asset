@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DockTile
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
   m_Sprite: {fileID: 7482667652216324306, guid: 758d0985c96cae641a2b7a8c4f77516e, type: 3}
-  m_Color: {r: 0.92549026, g: 0.27450982, b: 1, a: 1}
+  m_Color: {r: 0.92549026, g: 0.27450982, b: 1, a: 0}
   m_Transform:
     e00: 1
     e01: 0
