@@ -315,6 +315,11 @@ namespace SmallScaleInc.TopDownPixelCharactersPack1
             {
                 playerController.IncrementZombieKillCount();
             }
+
+            if (QuestManager.Instance != null)
+            {
+                QuestManager.Instance.AddZombieKill();
+            }
         }
 
 

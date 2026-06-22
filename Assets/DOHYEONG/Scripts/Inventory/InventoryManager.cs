@@ -99,4 +99,13 @@ public class InventoryManager : MonoBehaviour
 
         return null;
     }
+
+    public void AddMoney(int value)
+    {
+        if (value <= 0)
+            return;
+
+        money += value;
+        Debug.Log($"돈 획득: +{value}, 현재 돈: {money}");
+    }
 }
